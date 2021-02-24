@@ -560,3 +560,44 @@ export function nodeListForEach<T extends Node>(nodeList: NodeListOf<T>, action:
         action(nodeList[i]);
     }
 }
+
+// In cases where we want to add something to the DOM and measure it,
+// it is better for performance if we add it to a container underneath 
+// the body instead of directly on the body. This is because the render 
+// tree of the body is invalidated if a child is added directly. This 
+// invalidation causes a massive reflow for complex layouts. However, 
+// adding to a container underneath the body limits the reflow to only 
+// that container! The methods below enable this paradigm.
+
+export function createMeasurementContainer(): HTMLElement {
+    let measurementContainer = document.getElementById(Constants.MEASUREMENT_CONTAINER_ID);
+
+    if (!measurementContainer) {
+        measurementContainer = document.createElement('div');
+        measurementContainer.id = Constants.MEASUREMENT_CONTAINER_ID;
+
+        document.body.appendChild(measurementContainer);
+    }
+
+    return measurementContainer;
+}
+
+export function removeMeasurementContainer() {
+    const measurementContainer = document.getElementById(Constants.MEASUREMENT_CONTAINER_ID);
+
+    if (measurementContainer) {
+        measurementContainer.parentNode.removeChild(measurementContainer)
+    }
+}
+
+export function appendToMeasurementContainer(element: HTMLElement) {
+    const measurementContainer = createMeasurementContainer();
+    measurementContainer.appendChild(element);
+};
+
+export function removeFromMeasurementContainer(element: HTMLElement) {
+    const measurementContainer = document.getElementById(Constants.MEASUREMENT_CONTAINER_ID);
+    if (measurementContainer) {
+        measurementContainer.removeChild(element);
+    }
+}

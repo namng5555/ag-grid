@@ -43,4 +43,6 @@ export class Constants {
     static INPUT_SELECTOR = 'input, select, button, textarea';
     static FOCUSABLE_SELECTOR = '[tabindex], input, select, button, textarea';
     static FOCUSABLE_EXCLUDE = '.ag-hidden, .ag-hidden *, [disabled], .ag-disabled, .ag-disabled *';
+
+    static MEASUREMENT_CONTAINER_ID = 'ag-Grid-measurement-container';
 }
