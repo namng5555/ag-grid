@@ -161,6 +161,10 @@ export declare const _: {
     setCheckboxState(eCheckbox: HTMLInputElement, state: any): void;
     addOrRemoveAttribute(element: HTMLElement, name: string, value: any): void;
     nodeListForEach<T_21 extends Node>(nodeList: NodeListOf<T_21> | null, action: (value: T_21) => void): void;
+    createMeasurementContainer(): HTMLElement;
+    removeMeasurementContainer(): void;
+    appendToMeasurementContainer(element: HTMLElement): void;
+    removeFromMeasurementContainer(element: HTMLElement): void;
     serialiseDate(date: Date | null, includeTime?: boolean, separator?: string): string | null;
     parseDateTimeFromString(value?: string | null | undefined): Date | null;
     stringToArray(strData: string, delimiter?: string): string[][];

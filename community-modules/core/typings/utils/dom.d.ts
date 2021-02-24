@@ -91,3 +91,7 @@ export declare function iterateNamedNodeMap(map: NamedNodeMap, callback: (key: s
 export declare function setCheckboxState(eCheckbox: HTMLInputElement, state: any): void;
 export declare function addOrRemoveAttribute(element: HTMLElement, name: string, value: any): void;
 export declare function nodeListForEach<T extends Node>(nodeList: NodeListOf<T>, action: (value: T) => void): void;
+export declare function createMeasurementContainer(): HTMLElement;
+export declare function removeMeasurementContainer(): void;
+export declare function appendToMeasurementContainer(element: HTMLElement): void;
+export declare function removeFromMeasurementContainer(element: HTMLElement): void;

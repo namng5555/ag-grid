@@ -32,4 +32,5 @@ export declare class Constants {
     static INPUT_SELECTOR: string;
     static FOCUSABLE_SELECTOR: string;
     static FOCUSABLE_EXCLUDE: string;
+    static MEASUREMENT_CONTAINER_ID: string;
 }
