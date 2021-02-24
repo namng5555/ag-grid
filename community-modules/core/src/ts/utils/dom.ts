@@ -246,11 +246,11 @@ export function isRtlNegativeScroll(): boolean {
             <span style="display: inline-block; width: 1px"></span>
         </div>`;
 
-    document.body.appendChild(template);
+    appendToMeasurementContainer(template);
 
     template.scrollLeft = 1;
     rtlNegativeScroll = template.scrollLeft === 0;
-    document.body.removeChild(template);
+    removeFromMeasurementContainer(template);
 
     return rtlNegativeScroll;
 }

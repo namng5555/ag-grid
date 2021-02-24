@@ -1,3 +1,5 @@
+import { appendToMeasurementContainer, removeFromMeasurementContainer } from './dom';
+
 /**
  * These variables are lazy loaded, as otherwise they try and get initialised when we are loading
  * unit tests and we don't have references to window or document in the unit tests
@@ -105,7 +107,7 @@ export function getMaxDivHeight(): number {
     // FF reports the height back but still renders blank after ~6M px
     const testUpTo = navigator.userAgent.toLowerCase().match(/firefox/) ? 6000000 : 1000000000;
     const div = document.createElement('div');
-    document.body.appendChild(div);
+    appendToMeasurementContainer(div);
 
     while (true) {
         const test = res * 2;
@@ -118,13 +120,12 @@ export function getMaxDivHeight(): number {
         }
     }
 
-    document.body.removeChild(div);
+    removeFromMeasurementContainer(div);
 
     return res;
 }
 
 export function getScrollbarWidth(): number | null {
-    const body = document.body;
     const div = document.createElement('div');
 
     div.style.width = div.style.height = '100px';
@@ -133,7 +134,7 @@ export function getScrollbarWidth(): number | null {
     (div.style as any).msOverflowStyle = 'scrollbar'; // needed for WinJS apps
     div.style.position = 'absolute';
 
-    body.appendChild(div);
+    appendToMeasurementContainer(div);
 
     const width = div.offsetWidth - div.clientWidth;
 
@@ -152,11 +153,10 @@ export function getScrollbarWidth(): number | null {
 export function hasOverflowScrolling(): boolean {
     const prefixes: string[] = ['webkit', 'moz', 'o', 'ms'];
     const div: HTMLElement = document.createElement('div');
-    const body: HTMLBodyElement = document.getElementsByTagName('body')[0];
     let found: boolean = false;
     let p: string;
 
-    body.appendChild(div);
+    appendToMeasurementContainer(div);
     div.setAttribute('style', prefixes.map(prefix => `-${prefix}-overflow-scrolling: touch`).concat('overflow-scrolling: touch').join(';'));
 
     const computedStyle: CSSStyleDeclaration = window.getComputedStyle(div);

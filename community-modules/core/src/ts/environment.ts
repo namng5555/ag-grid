@@ -1,6 +1,6 @@
 import { Bean, Autowired } from './context/context';
 import { BeanStub } from "./context/beanStub";
-import { addCssClass } from './utils/dom';
+import { addCssClass, appendToMeasurementContainer, removeFromMeasurementContainer } from './utils/dom';
 import { doOnce } from './utils/function';
 
 export type SASS_PROPERTIES = 'headerHeight' | 'headerCellMinWidth' | 'listItemHeight' | 'rowHeight' | 'chartMenuPanelWidth';
@@ -102,10 +102,10 @@ export class Environment extends BeanStub {
             }, div);
 
             if (document.body) {
-                document.body.appendChild(div);
+                appendToMeasurementContainer(div);
                 const sizeName = key.toLowerCase().indexOf('height') !== -1 ? 'height' : 'width';
                 calculatedValue = parseInt(window.getComputedStyle(el)[sizeName], 10);
-                document.body.removeChild(div);
+                removeFromMeasurementContainer(div);
             }
         }
 
